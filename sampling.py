@@ -33,7 +33,7 @@ print(f"org length: {length}")
 print(f"org fps: {fps}")
 print(f"org dimension: {width}, {height}")
 print(f"out dimension: {width/4}, {height/4}")
-print(f("out fps: fps"))
+print(f"out fps: fps")
 
 print("capture start")
 n = 20
