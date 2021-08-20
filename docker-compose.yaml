@@ -2,6 +2,12 @@ version: "3"
 
 services:
 
+  sampling: 
+    image: opencv:local
+    command: sampling.py
+    volumes:
+      - ./:/home
+
   vim:
     image: spacevim/spacevim
     command: nvim
