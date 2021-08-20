@@ -18,6 +18,12 @@ s3.download_file(bucket, video_path, downloaded_file)
 
 print("cature created")
 cap = cv2.VideoCapture(downloaded_file)
+length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
+print(f"total frame counts: {length}")
+cap.release()
+
+exit()
 
 count = 0 
 
@@ -30,6 +36,5 @@ for i in range(999999999):
         cap.release()
         break
     print(f"count: {i}")
-
 
 print(f"frame count: {count}")
