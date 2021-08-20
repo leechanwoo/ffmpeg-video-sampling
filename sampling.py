@@ -47,7 +47,7 @@ for i in range(999999999):
         writer.release()
         break
 
-    print(f"\r{i}th frame processed")
+    print(f"{i}th frame processed", end="\r")
 
     if not length % samples_interval == 0:
         continue
