@@ -2,6 +2,7 @@
 import cv2
 import boto3
 import sys
+sys.stdout.flush()
 
 bucket = 'panoramic-videos'
 out_bucket = 'extracted-panoramic-images'
@@ -43,6 +44,7 @@ for i in range(999999999):
     ret, frame = cap.read()
     if not ret:
         cap.release()
+        writer.release()
         break
 
     if not length % samples_interval == 0:
