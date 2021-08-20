@@ -47,7 +47,8 @@ for i in range(999999999):
 
     if not length % samples_interval == 0:
         continue
-
+    
+    print("{i}/{length}th, {i % length}/20 frame written")
     resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
     writer.write(resized)
     
