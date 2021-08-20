@@ -3,10 +3,10 @@ version: "3"
 services:
   sampling: 
     image: opencv:local
-    command: sampling.py
+    command: bash
     working_dir: /home
     volumes:
       - ./:/home
     
-    #stdin_open: true
-    #tty: true
+    stdin_open: true
+    tty: true
