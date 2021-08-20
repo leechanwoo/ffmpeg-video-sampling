@@ -4,6 +4,7 @@ import boto3
 import sys
 sys.stdout.flush()
 
+s3 = boto3.client('s3')
 name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
 out_name = "out_" + name
 
