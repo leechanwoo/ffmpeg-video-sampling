@@ -4,12 +4,14 @@ import boto3
 import sys
 sys.stdout.flush()
 
-bucket = 'panoramic-videos'
+out_path = f"test/{out_name}"
 out_bucket = 'extracted-panoramic-images'
+s3.upload_file(out_bucket, out_path, out_name)
+exit()
+bucket = 'panoramic-videos'
 date = 17
 name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
 video_path = f"{date}/{name}"
-out_path = f"test/{name}"
 download_path = "/home/videos/{}"
 downloaded_file = download_path.format(name)
 
@@ -53,13 +55,10 @@ for i in range(999999999):
     if not length % samples_interval == 0:
         continue
     
-    #print(f"{i}/{length}th, {i % length}/{n} frame written")
     resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
     writer.write(resized)
     
 
-upload_file = "out.mp4"
-s3.upload_file(out_bucket, out_path, upload_file)
 
 
 cap.release()
