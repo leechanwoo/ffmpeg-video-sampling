@@ -4,9 +4,14 @@ import boto3
 import sys
 sys.stdout.flush()
 
+name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
+out_name = "out_" + name
+
+
 out_path = f"test/{out_name}"
 out_bucket = 'extracted-panoramic-images'
 s3.upload_file(out_bucket, out_path, out_name)
+
 exit()
 bucket = 'panoramic-videos'
 date = 17
