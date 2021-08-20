@@ -11,7 +11,7 @@ out_name = "out_" + name
 
 out_path = f"test/{out_name}"
 out_bucket = 'extracted-panoramic-images'
-s3.upload_file(out_bucket, out_path, out_name)
+s3.upload_file(out_name, out_bucket, out_path)
 
 exit()
 bucket = 'panoramic-videos'
