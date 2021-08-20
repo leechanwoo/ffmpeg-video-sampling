@@ -1,7 +1,7 @@
 
 import cv2
 import time 
-
+import boto3
 
 bucket = 'panoramic-videos'
 date = 17
