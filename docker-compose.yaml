@@ -3,7 +3,7 @@ version: "3"
 services:
   sampling: 
     image: opencv:local
-    command: python sampling.py
+    command: python -u sampling.py
     working_dir: /home
     volumes:
       - ./:/home
