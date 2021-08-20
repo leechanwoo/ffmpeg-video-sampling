@@ -48,7 +48,7 @@ for i in range(999999999):
         break
 
     progress = int(i/length*100)
-    print(f"{progress}% [" + "#"*progress + " "*(100-progress)+ "]", end="\r")
+    print(f"{i}/{length} {progress}% [" + "#"*progress + " "*(100-progress)+ "]", end="\r")
 
     if not length % samples_interval == 0:
         continue
