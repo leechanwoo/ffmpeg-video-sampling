@@ -22,7 +22,9 @@ for i in range(999999999):
     ret, frame = cap.read()
     if not ret:
         count = i
+        print(count, flush=True)
+        cap.release()
         break
 
 
-print(f"frame count: {count}")
+print(f"frame count: {count}", flush=True)
