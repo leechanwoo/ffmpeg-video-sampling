@@ -83,14 +83,15 @@ if __name__ == "__main__":
 
     f3t12 = re.compile("3-12")
 
-    #  jj_rng = "\d\d\d\d(0[7-9]|10)\d\d\d\d"
-    #  ay = "08([3-6]|9|1[0-2])-(0[7-9]|10)\d\d\d\d"
+    ay_rng = "202108([3-6]|9|1[0-2])-(0[7-9]|10)\d\d\d\d"
+    jj_rng = "2021\d\d\d\d(0[7-9]|10)\d\d\d\d"
     #  ch1 = re.compile(f"NVR-CH01_S2021\d\d\d\d-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
     #  ch2 = re.compile(f"NVR-CH02_S2021\d\d\d\d-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
     #  jj = re.compile("_2021\d\d\d\d\d\d\d\d\d\d_2021\d\d\d\d\d\d\d\d\d\d_0(|_1)\.avi")
-    ch1 = re.compile(f"NVR-CH01_S202108([3-6]|9|1[0-2])-(0[7-9]|10)\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
-    ch2 = re.compile(f"NVR-CH02_S202108([3-6]|9|1[0-2])-(0[7-9]|10)\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
-    jj = re.compile("_2021\d\d\d\d(0[7-9]|10)\d\d\d\d_2021\d\d\d\d\d\d\d\d\d\d_0(|_1)\.avi")
+
+    ch1 = re.compile(f"NVR-CH01_S{ay_rng}_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
+    ch2 = re.compile(f"NVR-CH02_S{ay_rng}_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
+    jj = re.compile(f"_{jj_rng}_2021\d\d\d\d\d\d\d\d\d\d_0(|_1)\.avi")
     
     config = SamplerConfig()
     src_bucket = config.src_bucket
