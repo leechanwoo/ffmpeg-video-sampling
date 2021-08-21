@@ -48,7 +48,7 @@ print("capture start")
 n = 20
 samples_interval = length/n
 
-for i in range(999999999):
+for i in range(100):
     ret, frame = cap.read()
     if not ret:
         cap.release()
@@ -58,13 +58,13 @@ for i in range(999999999):
     progress = int(i/length*100)
     print(f"{i}/{length} {progress}% [" + "#"*progress + " "*(100-progress)+ "]", end="\r")
 
+
     if not length % samples_interval == 0:
         continue
     
-    resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
-    writer.write(resized)
+    #resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
+    #writer.write(resized)
     
-
 
 
 cap.release()
