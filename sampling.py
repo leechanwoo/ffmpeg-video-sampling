@@ -4,16 +4,7 @@ import boto3
 import sys
 sys.stdout.flush()
 
-s3 = boto3.client('s3')
-name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
-out_name = "out_" + name
 
-
-out_path = f"test/{out_name}"
-out_bucket = 'extracted-panoramic-images'
-s3.upload_file(out_name, out_bucket, out_path)
-
-exit()
 bucket = 'panoramic-videos'
 date = 17
 name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
@@ -70,3 +61,6 @@ for i in range(100):
 cap.release()
 writer.release()
 
+out_path = f"test/{out_name}"
+out_bucket = 'extracted-panoramic-images'
+s3.upload_file(out_name, out_bucket, out_path)
