@@ -91,13 +91,10 @@ if __name__ == "__main__":
     config = SamplerConfig()
     src_bucket = config.src_bucket
 
-    for obj in src_bucket.objects.all():
+    for i, obj in enumerate(src_bucket.objects.all()):
         name = obj.key.split('/')[-1]
         if ch1.match(name) or ch2.match(name) or jj.match(name):
-            print(obj.key)
-
-
-
+            print(i, obj.key)
     
     exit()
 
