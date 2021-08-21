@@ -57,9 +57,9 @@ if __name__ == "__main__":
     s3 = boto3.resource('s3')
 
     src_bucket = s3.Bucket('panoramic-videos')
-    download_path = f"{date}/{name}"
+    download_path = f"{date}/{video_name}"
     print(f"download file: {video_path}")
-    src_bucket.download_file(download_path, name)
+    src_bucket.download_file(download_path, video_name)
 
     main(video_name=video_name, out_name=out_name)
 
