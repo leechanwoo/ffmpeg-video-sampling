@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
     print()
     print("not mached")
-    for o in filter(lambda summ: not ch1.match(summ.key.split('/')[-1]) && not ch2.match(summ.key.split('/')[-1]) && not jj.match(summ.key.split('/')[-1])):
+    for o in filter(lambda summ: not ch1.match(summ.key.split('/')[-1]) and not ch2.match(summ.key.split('/')[-1]) and not jj.match(summ.key.split('/')[-1])):
         print(o.key)
 
 
