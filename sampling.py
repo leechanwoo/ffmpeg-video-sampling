@@ -8,9 +8,9 @@ sys.stdout.flush()
 
 
 class VideoSampler():
-    def __init__(self, s3, src_bucket_name, dst_bucket_name):
-        self.src_bucket = s3.Bucket(src_bucket_name)
-        self.dst_bucket = s3.Bucket(dst_bucket_name)
+    def __init__(self, config):
+        self.src_bucket = config.src_bucket
+        self.dst_bucket = config.dst_bucket
         
 
     def process(self, video_name, out_name):
@@ -66,27 +66,27 @@ class VideoSampler():
         return path.split('/')[-1]
 
 
-
-
+class SamplerConfig():
+    def __init__(self):
+        self.s3 = boto3.resource('s3')
+        self.src_bucket = self.s3.Bucket('panoramic-videos')
+        self.dst_bucket = self.s3.Bucket('extracted-panoramic-images')
 
 
 
 
 if __name__ == "__main__":
-    date = 17
 
-    s3 = boto3.resource('s3')
-
-    svc = VideoSampler( s3=s3,
-                        src_bucket_name='panoramic-videos', 
-                        dst_bucket_name='extracted-panoramic-images')
+    
+    config = SamplerConfig()
+    svc = VideoSampler(config=config)
 
 
     video_name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
     out_name = "out_" + video_name
 
 
-    svc.download_video(f"{date}/{video_name}")
+    svc.download_video(f"{17}/{video_name}")
 
     svc.process(video_name=video_name, out_name=out_name)
 
