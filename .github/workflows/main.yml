@@ -19,4 +19,4 @@ jobs:
 
       - 
         name: Run
-        run: docker-compose run --rm -d sampling
+        run: docker-compose run --rm sampling
