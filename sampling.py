@@ -21,7 +21,7 @@ class VideoSampler():
 
         video_path, video_name = tuple(self.video_key.split('/'))
 
-        print("cature created")
+        print(f"cature created {video_name}")
         cap = cv2.VideoCapture(video_name)
         length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         fps = cap.get(cv2.CAP_PROP_FPS)
