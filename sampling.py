@@ -92,8 +92,9 @@ if __name__ == "__main__":
     src_bucket = config.src_bucket
 
     for obj in src_bucket.objects.all():
-        if ch1.match(obj.name) or ch2.match(obj.name) or jj.match(obj.name):
-            print(obj.name)
+        name = obj.key.split('/')[-1]
+        if ch1.match(name) or ch2.match(name) or jj.match(name):
+            print(obj.key)
 
 
 
