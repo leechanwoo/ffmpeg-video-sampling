@@ -56,7 +56,7 @@ for i in range(100):
         break
 
     progress = int(i/length*100)
-    #print(f"{i}/{length} {progress}% [" + "#"*progress + " "*(100-progress)+ "]", end="\r")
+    print(f"{i}/{length} {progress}% [" + "#"*progress + " "*(100-progress)+ "]", end="\r")
 
     resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
     writer.write(resized)
@@ -67,6 +67,8 @@ for i in range(100):
     #resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
     #writer.write(resized)
     
+
+
 cap.release()
 writer.release()
 
