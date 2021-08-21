@@ -19,7 +19,7 @@ video_path = f"{date}/{name}"
 
 
 print(f"download file: {video_path}")
-src_bucket.download_file(bucket, video_path, name)
+src_bucket.download_file(video_path, name)
 
 print("cature created")
 cap = cv2.VideoCapture(name)
