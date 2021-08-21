@@ -90,7 +90,10 @@ if __name__ == "__main__":
     config = SamplerConfig()
     src_bucket = config.src_bucket
 
-    for i, obj in enumerate(src_bucket.objects.all()):
+    objs = list(src_bucket.objects.all())
+    print(f"Number of objects: {len(objs)}")
+
+    for i, obj in enumerate(objs):
         name = obj.key.split('/')[-1]
         if ch1.match(name): 
             print(f"{i} ch1: {obj.key}")
@@ -101,6 +104,7 @@ if __name__ == "__main__":
         else:
             print(f"{i} Not matched: {obj.key}")
     
+
 
     exit()
 
