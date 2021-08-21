@@ -25,7 +25,6 @@ def process(video_name, out_name):
     print(f"out fps: {fps}")
 
     print("capture start")
-    samples_interval = length/n
 
     for i in range(100):
         ret, frame = cap.read()
