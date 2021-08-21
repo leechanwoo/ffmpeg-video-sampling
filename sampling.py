@@ -99,17 +99,33 @@ if __name__ == "__main__":
     objs = list(src_bucket.objects.all())
     print(f"Number of objects: {len(objs)}")
 
-    for i, obj in enumerate(objs):
-        name = obj.key.split('/')[-1]
-        if ch1.match(name): 
-            print(f"{i} ch1: {obj.key}")
-        elif ch2.match(name):
-            print(f"{i} ch2: {obj.key}")
-        elif jj.search(name):
-            print(f"{i} seoil: {obj.key}")
-        else:
-            print(f"{i} Not matched: {obj.key}")
+    print("ch1")
+    for ch1 in filter(lambda summ: ch1.match(summ.key.split('/')[-1])):
+        print(ch1)
 
+    print()
+    print("ch2")
+    for ch2 in filter(lambda summ: ch2.match(summ.key.split('/')[-1])):
+        print(ch2)
+
+    print()
+    print("jeonju")
+    for jj in filter(lambda summ: jj.match(summ.key.split('/')[-1])):
+        print(jj)
+
+
+
+    #  for i, obj in enumerate(objs):
+    #      name = obj.key.split('/')[-1]
+    #      if ch1.match(name):
+    #          print(f"{i} ch1: {obj.key}")
+    #      elif ch2.match(name):
+    #          print(f"{i} ch2: {obj.key}")
+    #      elif jj.search(name):
+    #          print(f"{i} seoil: {obj.key}")
+    #      else:
+    #          print(f"{i} Not matched: {obj.key}")
+    #
 
     exit()
 
