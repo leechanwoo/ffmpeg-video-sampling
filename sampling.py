@@ -61,7 +61,7 @@ if __name__ == "__main__":
     print(f"download file: {video_name}")
     src_bucket.download_file(download_path, video_name)
 
-    main(video_name=video_name, out_name=out_name)
+    process(video_name=video_name, out_name=out_name)
 
     smpl_bucket = s3.Bucket('extracted-panoramic-images')
     smpl_bucket.upload_file(out_name, upload_path)
