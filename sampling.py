@@ -87,15 +87,21 @@ if __name__ == "__main__":
     ch2 = re.compile("NVR-CH02_S202108\d\d-\d\d\d\d\d\d_E202108\d\d-\d\d\d\d\d\d\.(avi|mp4)")
     jj = re.compile("서일초정문(테스트)_202108\d\d\d\d\d\d\d\d_202108\d\d\d\d\d\d\d\d_0(|_1)\.avi")
     
-    
     config = SamplerConfig()
     src_bucket = config.src_bucket
 
     for i, obj in enumerate(src_bucket.objects.all()):
         name = obj.key.split('/')[-1]
-        if ch1.match(name) or ch2.match(name) or jj.match(name):
-            print(i, obj.key)
+        if ch1.match(name): 
+            print(f"{i} ch1: {obj.key}")
+        elif ch2.match(name):
+            print(f"{i} ch2: {obj.key}")
+        elif jj.match(name):
+            print(f"{i} seoil: {obj.key}")
+        else:
+            print(f"{i} Not matched: {obj.key}")
     
+
     exit()
 
     config = SamplerConfig()
