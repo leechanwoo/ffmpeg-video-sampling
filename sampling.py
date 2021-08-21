@@ -70,4 +70,4 @@ print("release")
 out_path = f"test/{out_name}"
 #  out_bucket = 'extracted-panoramic-images'
 smpl_bucket.upload_file(out_name, out_path)
-print("{out_name} uploaded")
+print(f"{out_name} uploaded")
