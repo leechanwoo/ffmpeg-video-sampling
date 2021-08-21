@@ -83,9 +83,9 @@ if __name__ == "__main__":
     #  "서일초정문(테스트)_20210801090000_20210801100000_0.avi"
     
     paths = ["14-15", "16ch1", "16ch2", "17", "3-12", "seoil_elem_school_test", "seoil_elem_school"]
-    ch1 = re.compile("NVR-CH01_S202108\d\d-\d\d\d\d\d\d_E202108\d\d-\d\d\d\d\d\d\.(avi|mp4)")
-    ch2 = re.compile("NVR-CH02_S202108\d\d-\d\d\d\d\d\d_E202108\d\d-\d\d\d\d\d\d\.(avi|mp4)")
-    jj = re.compile("_202108\d\d\d\d\d\d\d\d_202108\d\d\d\d\d\d\d\d_0(|_1)\.avi")
+    ch1 = re.compile("NVR-CH01_S2021\d\d\d\d-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
+    ch2 = re.compile("NVR-CH02_S2021\d\d\d\d-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
+    jj = re.compile("_2021\d\d\d\d\d\d\d\d\d\d_2021\d\d\d\d\d\d\d\d\d\d_0(|_1)\.avi")
     
     config = SamplerConfig()
     src_bucket = config.src_bucket
