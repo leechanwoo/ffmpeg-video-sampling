@@ -54,10 +54,12 @@ class VideoSampler():
             print(f"{i}/{length} {progress}% [" + "#"*progress + " "*(100-progress)+ "]")
 
             image_name = video_name + f'_{i}'.zfill(6) + '.jpg'
+            print(f"Saving image {image_name}")
             cv2.imwrite(image_name, frame)
             #  resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
             #  writer.write(resized)
 
+            print(f"Uploading image {image_name}")
             upload_path = os.path.join(video_path, image_name)
             self.upload_image(upload_path)
             
