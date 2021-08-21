@@ -126,5 +126,5 @@ if __name__ == "__main__":
         svc.download_video(obj.key)
         svc.process()
 
-        os.system("rm -rf *.jpg *.avi *.mp4")
+        #os.system("rm -rf *.jpg *.avi *.mp4")
 
