@@ -115,11 +115,11 @@ if __name__ == "__main__":
     #  video_name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
     #  out_name = "out_" + video_name
 
-    for key in rush_hours[:1]:
+    for obj in rush_hours[:1]:
 
         #  svc.download_video(f"{17}/{video_name}")
-        print(f"Downloading {key}")
-        svc.download_video(key)
+        print(f"Downloading {obj.key}")
+        svc.download_video(obj.key)
         svc.process(video_name=video_name)
 
         #  svc.upload_image(f"test/{out_name}")
