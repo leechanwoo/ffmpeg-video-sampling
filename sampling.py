@@ -114,6 +114,12 @@ if __name__ == "__main__":
         print(o.key)
 
 
+    print()
+    print("not mached")
+    for o in filter(lambda summ: not ch1.match(summ.key.split('/')[-1]) && not ch2.match(summ.key.split('/')[-1]) && not jj.match(summ.key.split('/')[-1])):
+        print(o.key)
+
+
 
     #  for i, obj in enumerate(objs):
     #      name = obj.key.split('/')[-1]
