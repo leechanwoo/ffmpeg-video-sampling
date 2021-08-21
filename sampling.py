@@ -100,17 +100,17 @@ if __name__ == "__main__":
     print(f"Number of objects: {len(objs)}")
 
     print("ch1")
-    for ch1 in filter(lambda summ: ch1.match(summ.key.split('/')[-1])):
+    for ch1 in filter(lambda summ: ch1.match(summ.key.split('/')[-1]), objs):
         print(ch1)
 
     print()
     print("ch2")
-    for ch2 in filter(lambda summ: ch2.match(summ.key.split('/')[-1])):
+    for ch2 in filter(lambda summ: ch2.match(summ.key.split('/')[-1]), objs):
         print(ch2)
 
     print()
     print("jeonju")
-    for jj in filter(lambda summ: jj.match(summ.key.split('/')[-1])):
+    for jj in filter(lambda summ: jj.match(summ.key.split('/')[-1]), objs):
         print(jj)
 
 
