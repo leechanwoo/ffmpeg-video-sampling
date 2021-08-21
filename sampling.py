@@ -73,16 +73,10 @@ class SamplerConfig():
         self.dst_bucket = self.s3.Bucket('extracted-panoramic-images')
 
 
-
-
 if __name__ == "__main__":
 
     import re
     
-    #paths = ["3-12", "seoil_elem_school_test", "seoil_elem_school"]
-
-    #f3t12 = re.compile("3-12")
-
     ay_rng = "202108(0[3-6]|09|1[0-2])-[0-1][7-9]\d\d\d\d"
     jj_rng = "2021\d\d\d\d[0-1][7-9]\d\d\d\d"
     #  ch1 = re.compile(f"NVR-CH01_S2021\d\d\d\d-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
@@ -99,24 +93,21 @@ if __name__ == "__main__":
     objs = list(src_bucket.objects.all())
     print(f"Number of objects: {len(objs)}")
 
-    print("ch1")
-    for o in filter(lambda summ: ch1.match(summ.key.split('/')[-1]), objs):
+    filtered = list(filter(lambda summ: ch1.match(summ.key.split('/')[-1]), objs)) 
+    print(f"ch1 count: {len(filtered)}")
+    for o in filtered:
         print(o.key)
 
     print()
-    print("ch2")
-    for o in filter(lambda summ: ch2.match(summ.key.split('/')[-1]), objs):
+    filtered = list(filter(lambda summ: ch2.match(summ.key.split('/')[-1]), objs))
+    print(f"ch2 count: {len(filtered)}")
+    for o in filtered:
         print(o.key)
 
     print()
-    print("jeonju")
-    for o in filter(lambda summ: jj.search(summ.key.split('/')[-1]), objs):
-        print(o.key)
-
-
-    print()
-    print("not mached")
-    for o in filter(lambda summ: not ch1.match(summ.key.split('/')[-1]) and not ch2.match(summ.key.split('/')[-1]) and not jj.search(summ.key.split('/')[-1]), objs):
+    filtered = list(filter(lambda summ: jj.search(summ.key.split('/')[-1]), objs))
+    print(f"jeonju count: {len(filtered)}")
+    for o in filtered:
         print(o.key)
 
 
