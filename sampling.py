@@ -5,17 +5,21 @@ import sys
 sys.stdout.flush()
 
 
-bucket = 'panoramic-videos'
+#  s3 = boto3.client('s3')
+s3 = boto3.resource('s3')
+
+src_bucket = s3.Bucket('panoramic-videos')
+smpl_bucket = s3.Bucket('extracted-panoramic-images')
+
+
+#  bucket = 'panoramic-videos'
 date = 17
 name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
 video_path = f"{date}/{name}"
-#download_path = "/home/videos/{}"
-#downloaded_file = download_path.format(name)
 
-s3 = boto3.client('s3')
 
 print(f"download file: {video_path}")
-s3.download_file(bucket, video_path, name)
+src_bucket.download_file(bucket, video_path, name)
 
 print("cature created")
 cap = cv2.VideoCapture(name)
@@ -64,6 +68,6 @@ cap.release()
 print("release")
 
 out_path = f"test/{out_name}"
-out_bucket = 'extracted-panoramic-images'
-s3.upload_file(out_name, out_bucket, out_path)
+#  out_bucket = 'extracted-panoramic-images'
+smpl_bucket.upload_file(out_name, out_path)
 print("{out_name} uploaded")
