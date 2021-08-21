@@ -20,15 +20,7 @@ jobs:
         with:
           context: /home/ec2-user/ffmpeg-video-sampling
           tags: opencv:local
-
-      - 
-        name: Check directory
-        run: echo $(ls)
-
-      - 
-        name: Pull repository
-        run: git pull 
           
       - 
         name: Run
-        run: docker-compose run --rm -d -f /home/ec2-user/ffmpeg-video-sampling/docker-compose.yaml sampling
+        run: docker-compose run --rm -d sampling
