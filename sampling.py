@@ -119,7 +119,7 @@ if __name__ == "__main__":
     #  video_name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
     #  out_name = "out_" + video_name
 
-    for i, obj in enumerate(rush_hours[:3]):
+    for i, obj in enumerate(rush_hours):
 
         #  svc.download_video(f"{17}/{video_name}")
         print(f"{i} Downloading {obj.key}")
