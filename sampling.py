@@ -83,8 +83,8 @@ if __name__ == "__main__":
 
     f3t12 = re.compile("3-12")
 
-    ay_rng = "202108([3-6]|9|1[0-2])-(0[7-9]|10)\d\d\d\d"
-    jj_rng = "2021\d\d\d\d(0[7-9]|10)\d\d\d\d"
+    ay_rng = "202108([3-6]|9|1[0-2])-[0-1][7-9]\d\d\d\d"
+    jj_rng = "2021\d\d\d\d[0-1][7-9]\d\d\d\d"
     #  ch1 = re.compile(f"NVR-CH01_S2021\d\d\d\d-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
     #  ch2 = re.compile(f"NVR-CH02_S2021\d\d\d\d-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
     #  jj = re.compile("_2021\d\d\d\d\d\d\d\d\d\d_2021\d\d\d\d\d\d\d\d\d\d_0(|_1)\.avi")
