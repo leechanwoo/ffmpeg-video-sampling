@@ -98,7 +98,7 @@ if __name__ == "__main__":
             return fn(summ.key.split('/')[-1])
         return get_name
 
-    rush_hours = list(filter(match(ch2.match), objs))
+    rush_hours = list(filter(match(ch1.match), objs)) +  list(filter(match(ch2.match), objs)) +  list(filter(match(jj.search), objs))
 
     for o in rush_hours:
         print(o.key)
