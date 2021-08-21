@@ -79,11 +79,11 @@ if __name__ == "__main__":
 
     import re
     
-    paths = ["3-12", "seoil_elem_school_test", "seoil_elem_school"]
+    #paths = ["3-12", "seoil_elem_school_test", "seoil_elem_school"]
 
-    f3t12 = re.compile("3-12")
+    #f3t12 = re.compile("3-12")
 
-    ay_rng = "202108([3-6]|9|1[0-2])-[0-1][7-9]\d\d\d\d"
+    ay_rng = "202108(0[3-6]|09|1[0-2])-[0-1][7-9]\d\d\d\d"
     jj_rng = "2021\d\d\d\d[0-1][7-9]\d\d\d\d"
     #  ch1 = re.compile(f"NVR-CH01_S2021\d\d\d\d-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
     #  ch2 = re.compile(f"NVR-CH02_S2021\d\d\d\d-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
@@ -108,8 +108,7 @@ if __name__ == "__main__":
         elif jj.search(name):
             print(f"{i} seoil: {obj.key}")
         else:
-            pass
-            #  print(f"{i} Not matched: {obj.key}")
+            print(f"{i} Not matched: {obj.key}")
 
 
     exit()
