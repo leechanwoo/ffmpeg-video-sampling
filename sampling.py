@@ -17,6 +17,7 @@ class VideoSampler():
 
     def process(self):
         if self.video_key is None:
+            print("Video key is none: download video first")
             return 
 
         video_path, video_name = tuple(self.video_key.split('/'))
@@ -59,8 +60,6 @@ class VideoSampler():
             image_name = video_name + f'_{i}'.zfill(6) + '.jpg'
             print(f"Saving image {image_name}")
             cv2.imwrite(image_name, frame)
-            #  resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
-            #  writer.write(resized)
 
             print(f"Uploading image {image_name}")
             upload_path = os.path.join(video_path, image_name)
@@ -126,5 +125,5 @@ if __name__ == "__main__":
         svc.download_video(obj.key)
         svc.process()
 
-        #os.system("rm -rf *.jpg *.avi *.mp4")
+        os.system("rm -rf *.jpg *.avi *.mp4")
 
