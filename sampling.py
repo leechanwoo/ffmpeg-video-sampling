@@ -12,11 +12,14 @@ class VideoSampler():
     def __init__(self, config):
         self.src_bucket = config.src_bucket
         self.dst_bucket = config.dst_bucket
+        self.video_key = None
         
 
-    def process(self, video_key):
+    def process(self):
+        if self.video_key is None:
+            return 
 
-        video_path, video_name = tuple(video_key.split('/'))
+        video_path, video_name = tuple(self.video_key.split('/'))
 
         print("cature created")
         cap = cv2.VideoCapture(video_name)
@@ -69,6 +72,7 @@ class VideoSampler():
         print("release")
 
     def download_video(self, download_path):
+        self.video_key = download_path
         self.src_bucket.download_file(download_path, self._get_name(download_path))
         print(f"{download_path} downloaded")
     
@@ -99,7 +103,6 @@ if __name__ == "__main__":
     config = SamplerConfig()
 
     objs = list(config.src_bucket.objects.all())
-    print(f"Number of objects: {len(objs)}")
 
     def regex(fn):
         def get_name(summ):
@@ -107,6 +110,7 @@ if __name__ == "__main__":
         return get_name
 
     rush_hours = list(filter(regex(ch1.match), objs)) +  list(filter(regex(ch2.match), objs)) +  list(filter(regex(jj.search), objs))
+    print(f"Number of objects: {len(rush_hours)}")
 
 
     svc = VideoSampler(config=config)
@@ -120,10 +124,10 @@ if __name__ == "__main__":
         #  svc.download_video(f"{17}/{video_name}")
         print(f"Downloading {obj.key}")
         svc.download_video(obj.key)
-        svc.process(video_name=video_name)
+        svc.process()
 
         #  svc.upload_image(f"test/{out_name}")
 
-        os.remove(video_name)
-        os.remove(out_name)
+        os.remove(obj.key)
+        os.system("rm -rf *.jpg")
 
