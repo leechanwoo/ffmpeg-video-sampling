@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     src_bucket = s3.Bucket('panoramic-videos')
     download_path = f"{date}/{video_name}"
-    print(f"download file: {video_path}")
+    print(f"download file: {video_name}")
     src_bucket.download_file(download_path, video_name)
 
     main(video_name=video_name, out_name=out_name)
