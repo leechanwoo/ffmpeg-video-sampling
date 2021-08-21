@@ -23,7 +23,7 @@ jobs:
 
       - 
         name: Check directory
-        run: ls
+        run: echo $(ls)
 
       - 
         name: Pull repository
