@@ -126,8 +126,5 @@ if __name__ == "__main__":
         svc.download_video(obj.key)
         svc.process()
 
-        #  svc.upload_image(f"test/{out_name}")
-
-        os.remove(obj.key)
-        os.system("rm -rf *.jpg")
+        os.system("rm -rf *.jpg *.avi *.mp4")
 
