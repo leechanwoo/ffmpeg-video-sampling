@@ -33,7 +33,7 @@ print(f"org length: {length}")
 print(f"org fps: {fps}")
 print(f"org dimension: {width}, {height}")
 print(f"out dimension: {width/4}, {height/4}")
-print(f"out fps: fps")
+print(f"out fps: {fps}")
 
 print("capture start")
 n = 20
@@ -47,7 +47,7 @@ for i in range(100):
         break
 
     progress = int(i/length*100)
-    #print(f"{i}/{length} {progress}% [" + "#"*progress + " "*(100-progress)+ "]", end="\r")
+    print(f"{i}/{length} {progress}% [" + "#"*progress + " "*(100-progress)+ "]")
 
     resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
     writer.write(resized)
@@ -61,6 +61,9 @@ for i in range(100):
 writer.release()
 cap.release()
 
+print("release")
+
 out_path = f"test/{out_name}"
 out_bucket = 'extracted-panoramic-images'
 s3.upload_file(out_name, out_bucket, out_path)
+print("{out_name} uploaded")
