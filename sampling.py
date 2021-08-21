@@ -58,8 +58,8 @@ for i in range(100):
     #resized = cv2.resize(frame, dsize=frameSize, interpolation=cv2.INTER_AREA)
     #writer.write(resized)
     
-cap.release()
 writer.release()
+cap.release()
 
 out_path = f"test/{out_name}"
 out_bucket = 'extracted-panoramic-images'
