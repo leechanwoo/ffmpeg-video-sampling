@@ -85,7 +85,7 @@ if __name__ == "__main__":
     paths = ["14-15", "16ch1", "16ch2", "17", "3-12", "seoil_elem_school_test", "seoil_elem_school"]
     ch1 = re.compile("NVR-CH01_S202108\d\d-\d\d\d\d\d\d_E202108\d\d-\d\d\d\d\d\d\.(avi|mp4)")
     ch2 = re.compile("NVR-CH02_S202108\d\d-\d\d\d\d\d\d_E202108\d\d-\d\d\d\d\d\d\.(avi|mp4)")
-    jj = re.compile("서일초정문(테스트)_202108\d\d\d\d\d\d\d\d_202108\d\d\d\d\d\d\d\d_0(|_1)\.avi")
+    jj = re.compile("_202108\d\d\d\d\d\d\d\d_202108\d\d\d\d\d\d\d\d_0(|_1)\.avi")
     
     config = SamplerConfig()
     src_bucket = config.src_bucket
@@ -99,7 +99,7 @@ if __name__ == "__main__":
             print(f"{i} ch1: {obj.key}")
         elif ch2.match(name):
             print(f"{i} ch2: {obj.key}")
-        elif jj.match(name):
+        elif jj.search(name):
             print(f"{i} seoil: {obj.key}")
         else:
             print(f"{i} Not matched: {obj.key}")
