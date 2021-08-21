@@ -118,12 +118,11 @@ if __name__ == "__main__":
     for key in rush_hours[:1]:
 
         #  svc.download_video(f"{17}/{video_name}")
+        print(f"Downloading {key}")
         svc.download_video(key)
-
         svc.process(video_name=video_name)
 
         #  svc.upload_image(f"test/{out_name}")
-
 
         os.remove(video_name)
         os.remove(out_name)
