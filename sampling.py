@@ -3,6 +3,7 @@ import cv2
 import boto3
 
 import os
+import re
 import sys
 sys.stdout.flush()
 
@@ -75,7 +76,6 @@ class SamplerConfig():
 
 if __name__ == "__main__":
 
-    import re
     
     ay_rng = "202108(0[3-6]|09|1[0-2])-[0-1][7-9]\d\d\d\d"
     jj_rng = "2021\d\d\d\d[0-1][7-9]\d\d\d\d"
@@ -93,38 +93,23 @@ if __name__ == "__main__":
     objs = list(src_bucket.objects.all())
     print(f"Number of objects: {len(objs)}")
 
-    filtered = list(filter(lambda summ: ch1.match(summ.key.split('/')[-1]), objs)) 
-    print(f"ch1 count: {len(filtered)}")
-    for o in filtered:
-        print(o.key)
+    def match(fn):
+        def get_name(summ):
+            return fn(summ.key.split('/')[-1])
+        return get_name
 
-    print()
-    filtered = list(filter(lambda summ: ch2.match(summ.key.split('/')[-1]), objs))
-    print(f"ch2 count: {len(filtered)}")
-    for o in filtered:
-        print(o.key)
+    rush_hours = list(filter(match(ch2.match), objs))
 
-    print()
-    filtered = list(filter(lambda summ: jj.search(summ.key.split('/')[-1]), objs))
-    print(f"jeonju count: {len(filtered)}")
-    for o in filtered:
+    for o in rush_hours:
         print(o.key)
 
 
-
-    #  for i, obj in enumerate(objs):
-    #      name = obj.key.split('/')[-1]
-    #      if ch1.match(name):
-    #          print(f"{i} ch1: {obj.key}")
-    #      elif ch2.match(name):
-    #          print(f"{i} ch2: {obj.key}")
-    #      elif jj.search(name):
-    #          print(f"{i} seoil: {obj.key}")
-    #      else:
-    #          print(f"{i} Not matched: {obj.key}")
-    #
+    #  filtered = list(filter(lambda summ: ch1.match(get_name(summ)), objs))
+    #  filtered = list(filter(lambda summ: ch2.match(summ.key.split('/')[-1]), objs))
+    #  filtered = list(filter(lambda summ: jj.search(summ.key.split('/')[-1]), objs))
 
     exit()
+
 
     config = SamplerConfig()
     svc = VideoSampler(config=config)
