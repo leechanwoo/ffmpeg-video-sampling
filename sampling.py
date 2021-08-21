@@ -83,16 +83,14 @@ if __name__ == "__main__":
 
 
     video_name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
-    download_path = f"{date}/{video_name}"
-    svc.download_video(download_path)
+    out_name = "out_" + video_name
 
+
+    svc.download_video(f"{date}/{video_name}")
 
     svc.process(video_name=video_name, out_name=out_name)
 
-
-    out_name = "out_" + video_name
-    upload_path = f"test/{out_name}"
-    svc.upload_image(upload_path)
+    svc.upload_image(f"test/{out_name}")
 
 
     os.remove(video_name)
