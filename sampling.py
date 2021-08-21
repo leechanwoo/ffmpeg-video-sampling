@@ -25,8 +25,8 @@ class VideoSampler():
         cap = cv2.VideoCapture(video_name)
         length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         fps = cap.get(cv2.CAP_PROP_FPS)
-        width  = cap.get(cv2.CAP_PROP_FRAME_WIDTH)   
-        height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        #  width  = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+        #  height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
         #  frameSize = (int(width/4), int(height/4))
         #  fourcc = cv2.VideoWriter_fourcc(*'mp4v')
@@ -35,8 +35,8 @@ class VideoSampler():
         print(f"org length: {length}")
         print(f"org fps: {fps}")
         print(f"org dimension: {width}, {height}")
-        print(f"out dimension: {width/4}, {height/4}")
-        print(f"out fps: {fps}")
+        #  print(f"out dimension: {width/4}, {height/4}")
+        #  print(f"out fps: {fps}")
 
         print("capture start")
 
@@ -119,10 +119,10 @@ if __name__ == "__main__":
     #  video_name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
     #  out_name = "out_" + video_name
 
-    for obj in rush_hours[:3]:
+    for i, obj in enumerate(rush_hours[:3]):
 
         #  svc.download_video(f"{17}/{video_name}")
-        print(f"Downloading {obj.key}")
+        print(f"{i} Downloading {obj.key}")
         svc.download_video(obj.key)
         svc.process()
 
