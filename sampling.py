@@ -1,6 +1,8 @@
 
 import cv2
 import boto3
+
+import os
 import sys
 sys.stdout.flush()
 
