@@ -18,7 +18,7 @@ print(f"download file: {video_path}")
 s3.download_file(bucket, video_path, name)
 
 print("cature created")
-cap = cv2.VideoCapture(downloaded_file)
+cap = cv2.VideoCapture(name)
 length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 fps = cap.get(cv2.CAP_PROP_FPS)
 width  = cap.get(cv2.CAP_PROP_FRAME_WIDTH)   
