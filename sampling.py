@@ -13,7 +13,7 @@ class VideoSampler():
         self.dst_bucket = s3.Bucket(dst_bucket_name)
         
 
-    def process(video_name, out_name):
+    def process(self, video_name, out_name):
 
         print("cature created")
         cap = cv2.VideoCapture(video_name)
@@ -53,16 +53,16 @@ class VideoSampler():
 
         print("release")
 
-    def download_video(download_path):
+    def download_video(self, download_path):
         self.src_bucket.download_file(download_path, self._get_name(download_path))
         print(f"{download_path} downloaded")
     
-    def upload_image(upload_path):
+    def upload_image(self, upload_path):
         self.dst_bucket.upload_file(self._get_name(upload_path), upload_path)
         print(f"{upload_path} uploaded")
 
 
-    def _get_name(path):
+    def _get_name(self, path):
         return path.split('/')[-1]
 
 
