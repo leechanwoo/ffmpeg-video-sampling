@@ -46,10 +46,10 @@ class VideoSampler():
             ret, frame = cap.read()
             if not ret:
                 cap.release()
-                #  writer.release()
                 break
 
-            progress = int(i/length/30*100)
+            complete = int(length/30)
+            progress = int(i/complete*100)
 
             image_name = video_name + f'_{i}'.zfill(6) + '.jpg'
             cv2.imwrite(image_name, frame)
@@ -60,9 +60,8 @@ class VideoSampler():
             if i > 100:
                 break
 
-            print(f"{i}/{length/30} {progress}% [" + "#"*progress + " "*(100-progress)+ "]", end='\r')
+            print(f"{i}/{complete} {progress}% [" + "#"*progress + " "*(100-progress)+ "]")
             
-        #  writer.release()
         cap.release()
 
         print("release")
