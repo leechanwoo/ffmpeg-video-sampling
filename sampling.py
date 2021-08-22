@@ -88,7 +88,7 @@ if __name__ == "__main__":
     ch1 = re.compile(f"NVR-CH01_S{ay_rng}_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
     ch2 = re.compile(f"NVR-CH02_S{ay_rng}_E2021\d\d\d\d-\d\d\d\d\d\d\.(avi|mp4)")
     jj = re.compile(f"_{jj_rng}_2021\d\d\d\d\d\d\d\d\d\d_0(|_1)\.avi")
-    holiday = re.compile(f"NVR-CH0[1-2]_S2021081[4-7]-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4")
+    holiday = re.compile(f"NVR-CH0[1-2]_S20210816-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4")
 
     config = SamplerConfig()
     objs = list(config.src_bucket.objects.all())
@@ -98,7 +98,7 @@ if __name__ == "__main__":
             return fn(summ.key.split('/')[-1])
         return get_name
 
-    holiday_objs = list(filter(regex(holiday.match), objs))[:1]
+    holiday_objs = list(filter(regex(holiday.match), objs))
     print(f"Number of objects: {len(holiday_objs)}")
 
     svc = VideoSampler(config=config)
