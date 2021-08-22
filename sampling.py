@@ -57,9 +57,6 @@ class VideoSampler():
             upload_path = os.path.join(video_path, image_name)
             self.upload_image(upload_path)
 
-            if i > 100:
-                break
-
             print(f"{i}/{complete} {progress}% [" + "#"*progress + " "*(100-progress)+ "]")
             
         cap.release()
