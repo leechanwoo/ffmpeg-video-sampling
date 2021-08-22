@@ -8,6 +8,6 @@ ENV AWS_DEFAULT_REGION=ap-northeast-2
 
 RUN pip3 install boto3
 
-ENV CATEGORY="15"
+ENV CATEGORY="14"
 
 
