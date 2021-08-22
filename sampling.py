@@ -12,14 +12,9 @@ class VideoSampler():
     def __init__(self, config):
         self.src_bucket = config.src_bucket
         self.dst_bucket = config.dst_bucket
-        self.video_key = None
         
 
-    def process(self):
-        if self.video_key is None:
-            print("Video key is none: download video first")
-            return 
-
+    def process(self, video_key):
         video_path, video_name = tuple(self.video_key.split('/'))
 
         print(f"cature created {video_name}")
@@ -71,9 +66,9 @@ class VideoSampler():
         print("release")
 
     def download_video(self, download_path):
-        self.video_key = download_path
         self.src_bucket.download_file(download_path, self._get_name(download_path))
         print(f"{download_path} downloaded")
+        return download_path
     
     def upload_image(self, upload_path):
         self.dst_bucket.upload_file(self._get_name(upload_path), upload_path)
@@ -101,7 +96,6 @@ if __name__ == "__main__":
     holiday = re.compile(f"NVR-CH0[1-2]_S2021081[4-7]-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4")
 
     config = SamplerConfig()
-
     objs = list(config.src_bucket.objects.all())
 
     def regex(fn):
@@ -109,34 +103,15 @@ if __name__ == "__main__":
             return fn(summ.key.split('/')[-1])
         return get_name
 
-    holiday_objs = list(filter(regex(holiday.match), objs))
+    holiday_objs = list(filter(regex(holiday.match), objs))[:1]
     print(f"Number of objects: {len(holiday_objs)}")
-
-
-    for i, o in enumerate(holiday_objs):
-        print(i, o.key)
-
-    
-
-    exit()
-
-
-    rush_hours = list(filter(regex(ch1.match), objs)) +  list(filter(regex(ch2.match), objs)) +  list(filter(regex(jj.search), objs))
-    print(f"Number of objects: {len(rush_hours)}")
-
 
     svc = VideoSampler(config=config)
 
-
-    #  video_name = "NVR-CH01_S20210817-000000_E20210817-001334.mp4"
-    #  out_name = "out_" + video_name
-
-    for i, obj in enumerate(rush_hours):
-
-        #  svc.download_video(f"{17}/{video_name}")
+    for i, obj in enumerate(holiday_objs):
         print(f"{i} Downloading {obj.key}")
-        svc.download_video(obj.key)
-        svc.process()
+        key = svc.download_video(obj.key)
+        svc.process(video_key=key)
 
         os.system("rm -rf *.jpg *.avi *.mp4")
 
