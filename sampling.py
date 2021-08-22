@@ -87,7 +87,7 @@ if __name__ == "__main__":
     jj = re.compile(f"_{jj_rng}_2021\d\d\d\d\d\d\d\d\d\d_0(|_1)\.avi")
 
 
-    day = 16
+    day = os.environ['CATEGORY']
     holiday = re.compile(f"NVR-CH0[1-2]_S202108{day}-\d\d\d\d\d\d_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4")
 
     config = SamplerConfig()
