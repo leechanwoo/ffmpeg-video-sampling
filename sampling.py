@@ -108,6 +108,8 @@ if __name__ == "__main__":
         key = svc.download_video(obj.key)
         progress = (i, len(holiday_objs))
         svc.process(video_key=key, video_progress=progress)
+        os.system("rm -rf *.mp4")
+        os.system("rm -rf *.jpg")
         print(f"current files {os.listdir('./')}")
 
 
