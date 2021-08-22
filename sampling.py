@@ -51,7 +51,7 @@ class VideoSampler():
             complete = int(length/30)
             progress = int(i/complete*100)
 
-            image_name = video_name + f'_{i}'.zfill(6) + '.jpg'
+            image_name = video_name + "_" + f'{i}'.zfill(6) + '.jpg'
             cv2.imwrite(image_name, frame)
 
             upload_path = os.path.join(video_path, image_name)
