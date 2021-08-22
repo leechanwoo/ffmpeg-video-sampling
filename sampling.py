@@ -14,7 +14,8 @@ class VideoSampler():
         self.dst_bucket = config.dst_bucket
         
 
-    def process(self, video_key):
+    def process(self, video_key, video_progress):
+        vi, vcomp = video_progress
         video_path, video_name = tuple(video_key.split('/'))
 
         print(f"cature created {video_name}")
@@ -56,12 +57,13 @@ class VideoSampler():
 
             upload_path = os.path.join(video_path, image_name)
             self.upload_image(upload_path)
+            vprogress = int(vi/vcomp*100)
+            print(f"{vi}/{vcomp} {vprogress}% [" + "#"*vprogress + " "*(100-vprogress)+ "]")
 
             print(f"{i}/{complete} {progress}% [" + "#"*progress + " "*(100-progress)+ "]")
             
         cap.release()
 
-        print("release")
 
     def download_video(self, download_path):
         self.src_bucket.download_file(download_path, self._get_name(download_path))
@@ -109,7 +111,8 @@ if __name__ == "__main__":
     for i, obj in enumerate(holiday_objs):
         print(f"{i} Downloading {obj.key}")
         key = svc.download_video(obj.key)
-        svc.process(video_key=key)
+        progress = (i, len(holiday_objs))
+        svc.process(video_key=key, progress)
 
         os.system("rm -rf *.jpg *.avi *.mp4")
 
