@@ -31,9 +31,6 @@ class VideoSampler():
         print("capture start")
 
         for i in range(999999999):
-            if i > 50:
-                break
-
             for j in range(29):
                 ret, dummy = cap.read()
                 del dummy
