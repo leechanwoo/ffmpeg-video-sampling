@@ -49,16 +49,18 @@ class VideoSampler():
                 #  writer.release()
                 break
 
-            progress = int(i/length*100)
-            print(f"{i}/{length} {progress}% [" + "#"*progress + " "*(100-progress)+ "]")
+            progress = int(i/length/30*100)
 
             image_name = video_name + f'_{i}'.zfill(6) + '.jpg'
-            print(f"Saving image {image_name}")
             cv2.imwrite(image_name, frame)
 
-            print(f"Uploading image {image_name}")
             upload_path = os.path.join(video_path, image_name)
             self.upload_image(upload_path)
+
+            if i > 100:
+                break
+
+            print(f"{i}/{length/30} {progress}% [" + "#"*progress + " "*(100-progress)+ "]", end='\r')
             
         #  writer.release()
         cap.release()
