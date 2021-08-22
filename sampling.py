@@ -114,7 +114,7 @@ if __name__ == "__main__":
 
 
     for i, o in enumerate(holiday_objs):
-        print(o.key)
+        print(i, o.key)
 
     
 
