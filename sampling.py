@@ -25,19 +25,15 @@ class VideoSampler():
         width  = cap.get(cv2.CAP_PROP_FRAME_WIDTH)   
         height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
-        #  frameSize = (int(width/4), int(height/4))
-        #  fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        #  writer = cv2.VideoWriter(out_name, fourcc, fps, frameSize)
-
         print(f"org length: {length}")
         print(f"org fps: {fps}")
         print(f"org dimension: {width}, {height}")
-        #  print(f"out dimension: {width/4}, {height/4}")
-        #  print(f"out fps: {fps}")
-
         print("capture start")
 
         for i in range(999999999):
+            if i > 50:
+                break
+
             for j in range(29):
                 ret, dummy = cap.read()
                 del dummy
@@ -58,9 +54,8 @@ class VideoSampler():
             upload_path = os.path.join(video_path, image_name)
             self.upload_image(upload_path)
             vprogress = int(vi/vcomp*100)
-            print(f"{vi}/{vcomp} {vprogress}% [" + "#"*vprogress + " "*(100-vprogress)+ "]")
-
-            print(f"{i}/{complete} {progress}% [" + "#"*progress + " "*(100-progress)+ "]")
+            print(f"[V progress] {vi}/{vcomp} {vprogress}% [" + "#"*vprogress + " "*(100-vprogress)+ "]")
+            print(f"[I progress] {i}/{complete} {progress}% [" + "#"*progress + " "*(100-progress)+ "]")
             
         cap.release()
 
@@ -113,6 +108,8 @@ if __name__ == "__main__":
         key = svc.download_video(obj.key)
         progress = (i, len(holiday_objs))
         svc.process(video_key=key, video_progress=progress)
+        print(f"current files {os.listdir('./')}")
 
-        os.system("rm -rf *.jpg *.avi *.mp4")
+
+
 
