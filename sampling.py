@@ -79,6 +79,73 @@ class SamplerConfig():
 
 
 if __name__ == "__main__":
+
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket('extracted-panoramic-images')
+
+
+    import random
+    time_range = "-(1[4-9]|2[0-2])\d\d\d\d"
+    ch1_regex= f"NVR-CH01_S2021081(4|5){time_range}_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4_\d\d\d\d\d\d\.jpg"
+    ch2_regex= f"NVR-CH02_S2021081(4|5){time_range}_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4_\d\d\d\d\d\d\.jpg"
+    ch1 = re.compile(ch1_regex)
+    ch2 = re.compile(ch2_regex)
+
+    objs = list(config.src_bucket.objects.all())
+    ch1_objs = list(filter(ch1.match, objs))
+    ch2_objs = list(filter(ch2.match, objs))
+
+    print("ch1 shuffling...")
+    ch1_shuffled = random.shuffle(ch1_objs)
+
+    print("ch2 shuffling...")
+    ch2_shuffled = random.shuffle(ch2_objs)
+    
+    crowd = 15000
+    superb = 3000
+    ch1_choosed = ch1_shuffled[:crowd+superb]
+    ch2_choosed = ch2_shuffled[:crowd+superb]
+
+    ch1_crowd = ch1_choosed[:crowd]
+    ch2_crowd = ch2_choosed[:crowd]
+    ch1_superb = ch1_choosed[crowd:superb]
+    ch2_superb = ch2_choosed[crowd:superb]
+
+
+    upload_to = "crowdworks/ch1"
+    for i, obj in enumerate(ch1_crowd):
+        filename = os.path.basename(obj.key)
+        print(f"{i}/{len(ch1_crowd)} upload to: {upload_to}/{filename}")
+        bucket.download_file(obj.key,  filename)
+        bucket.upload_file(filename, os.path.join(upload_to, filename))
+
+    upload_to = "crowdworks/ch2"
+    for i, obj in enumerate(ch2_crowd):
+        filename = os.path.basename(obj.key)
+        print(f"{i}/{len(ch2_crowd)} upload to: {upload_to}/{filename}")
+        bucket.download_file(obj.key,  filename)
+        bucket.upload_file(filename, os.path.join(upload_to, filename))
+
+
+    upload_to = "superbai/ch1"
+    for i, obj in enumerate(ch1_superb):
+        filename = os.path.basename(obj.key)
+        print(f"{i}/{len(ch1_superb)} upload to: {upload_to}/{filename}")
+        bucket.download_file(obj.key,  filename)
+        bucket.upload_file(filename, os.path.join(upload_to, filename))
+
+
+    upload_to = "superbai/ch2"
+    for i, obj in enumerate(ch2_superb):
+        filename = os.path.basename(obj.key)
+        print(f"{i}/{len(ch2_superb)} upload to: {upload_to}/{filename}")
+        bucket.download_file(obj.key,  filename)
+        bucket.upload_file(filename, os.path.join(upload_to, filename))
+
+
+
+    exit()
+
     ay_rng = "202108(0[3-6]|09|1[0-2])-[0-1][7-9]\d\d\d\d"
     jj_rng = "2021\d\d\d\d[0-1][7-9]\d\d\d\d"
 
@@ -92,6 +159,7 @@ if __name__ == "__main__":
 
     config = SamplerConfig()
     objs = list(config.src_bucket.objects.all())
+
 
     def regex(fn):
         def get_name(summ):
