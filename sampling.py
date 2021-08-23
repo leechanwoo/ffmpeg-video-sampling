@@ -83,6 +83,9 @@ if __name__ == "__main__":
     s3 = boto3.resource('s3')
     bucket = s3.Bucket('extracted-panoramic-images')
 
+    
+    crowd = 15000
+    superb = 3000
 
     import random
     time_range = "-(1[4-9]|2[0-2])\d\d\d\d"
@@ -91,59 +94,68 @@ if __name__ == "__main__":
     ch1 = re.compile(ch1_regex)
     ch2 = re.compile(ch2_regex)
 
-
     print("get all objects..")
     objs = list(bucket.objects.all())
-    ch1_objs = list(filter(lambda obj: ch1.match(obj.key), objs))
-    ch2_objs = list(filter(lambda obj: ch2.match(obj.key), objs))
 
-    print("ch1 shuffling...")
-    random.shuffle(ch1_objs)
+    def choose_objects(regex, ch):
 
-    print("ch2 shuffling...")
-    random.shuffle(ch2_objs)
-    
-    crowd = 15000
-    superb = 3000
-    ch1_choosed = ch1_objs[:crowd+superb]
-    ch2_choosed = ch2_objs[:crowd+superb]
+        print("get ch1 objects")
+        filtered_objects = list(filter(lambda obj: regex(obj.key), objs))
 
-    ch1_crowd = ch1_choosed[:crowd]
-    ch2_crowd = ch2_choosed[:crowd]
-    ch1_superb = ch1_choosed[crowd:superb]
-    ch2_superb = ch2_choosed[crowd:superb]
+        print("ch1 shuffling...")
+        random.shuffle(filtered_objects)
+
+        choosed = filtered_objects[:crowd+superb]
+
+        crowd = choosed[:crowd]
+        uperb = choosed[crowd:superb]
 
 
-    upload_to = "crowdworks/ch1"
-    for i, obj in enumerate(ch1_crowd):
-        filename = os.path.basename(obj.key)
-        print(f"{i}/{len(ch1_crowd)} upload to: {upload_to}/{filename}")
-        bucket.download_file(obj.key,  filename)
-        bucket.upload_file(filename, os.path.join(upload_to, filename))
-
-    upload_to = "crowdworks/ch2"
-    for i, obj in enumerate(ch2_crowd):
-        filename = os.path.basename(obj.key)
-        print(f"{i}/{len(ch2_crowd)} upload to: {upload_to}/{filename}")
-        bucket.download_file(obj.key,  filename)
-        bucket.upload_file(filename, os.path.join(upload_to, filename))
+        upload_to = f"crowdworks/ch{ch}"
+        for i, obj in enumerate(crowd):
+            filename = os.path.basename(obj.key)
+            print(f"{i}/{len(crowd)} upload to: {upload_to}/{filename}")
+            bucket.download_file(obj.key,  filename)
+            bucket.upload_file(filename, os.path.join(upload_to, filename))
 
 
-    upload_to = "superbai/ch1"
-    for i, obj in enumerate(ch1_superb):
-        filename = os.path.basename(obj.key)
-        print(f"{i}/{len(ch1_superb)} upload to: {upload_to}/{filename}")
-        bucket.download_file(obj.key,  filename)
-        bucket.upload_file(filename, os.path.join(upload_to, filename))
+        upload_to = f"superbai/ch{ch}"
+        for i, obj in enumerate(superb):
+            filename = os.path.basename(obj.key)
+            print(f"{i}/{len(superb)} upload to: {upload_to}/{filename}")
+            bucket.download_file(obj.key,  filename)
+            bucket.upload_file(filename, os.path.join(upload_to, filename))
 
 
-    upload_to = "superbai/ch2"
-    for i, obj in enumerate(ch2_superb):
-        filename = os.path.basename(obj.key)
-        print(f"{i}/{len(ch2_superb)} upload to: {upload_to}/{filename}")
-        bucket.download_file(obj.key,  filename)
-        bucket.upload_file(filename, os.path.join(upload_to, filename))
+    choose_objects(ch1.match, "1")
+    choose_objects(ch2.match, "2")
 
+    #
+    #  ch2_choosed = ch2_objs[:crowd+superb]
+    #
+    #  ch2_crowd = ch2_choosed[:crowd]
+    #  ch2_superb = ch2_choosed[crowd:superb]
+    #
+    #  print("get ch2 objects")
+    #  ch2_objs = list(filter(lambda obj: ch2.match(obj.key), objs))
+    #
+    #  print("ch2 shuffling...")
+    #  random.shuffle(ch2_objs)
+    #
+    #  upload_to = "crowdworks/ch2"
+    #  for i, obj in enumerate(ch2_crowd):
+    #      filename = os.path.basename(obj.key)
+    #      print(f"{i}/{len(ch2_crowd)} upload to: {upload_to}/{filename}")
+    #      bucket.download_file(obj.key,  filename)
+    #      bucket.upload_file(filename, os.path.join(upload_to, filename))
+    #
+    #  upload_to = "superbai/ch2"
+    #  for i, obj in enumerate(ch2_superb):
+    #      filename = os.path.basename(obj.key)
+    #      print(f"{i}/{len(ch2_superb)} upload to: {upload_to}/{filename}")
+    #      bucket.download_file(obj.key,  filename)
+    #      bucket.upload_file(filename, os.path.join(upload_to, filename))
+    #
 
 
     exit()
