@@ -99,10 +99,10 @@ if __name__ == "__main__":
         superb = 3000
 
         print("get ch1 objects")
-        filtered_objects = list(filter(lambda obj: regex(obj.key), objs))
-        print(filtered_objects)
+        filtered_objects = list(filter(lambda obj: regex(os.path.basename(obj.key)), objs))
+        print(f"count: {len(filtered_objects)}")
 
-        print("ch{ch} shuffling...")
+        print(f"ch{ch} shuffling...")
         random.shuffle(filtered_objects)
 
         choosed = filtered_objects[:(crowd+superb)]
