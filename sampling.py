@@ -91,9 +91,11 @@ if __name__ == "__main__":
     ch1 = re.compile(ch1_regex)
     ch2 = re.compile(ch2_regex)
 
+
+    print("get all objects..")
     objs = list(bucket.objects.all())
-    ch1_objs = list(filter(ch1.match, objs))
-    ch2_objs = list(filter(ch2.match, objs))
+    ch1_objs = list(filter(lambda obj: ch1.match(obj.key), objs))
+    ch2_objs = list(filter(lambda obj: ch2.match(obj.key), objs))
 
     print("ch1 shuffling...")
     ch1_shuffled = random.shuffle(ch1_objs)
