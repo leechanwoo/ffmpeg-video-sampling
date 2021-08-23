@@ -104,6 +104,7 @@ if __name__ == "__main__":
 
         print(f"ch{ch} shuffling...")
         random.shuffle(filtered_objects)
+        print(f"shuffled count: {len(filtered_objects)}")
 
         choosed = filtered_objects[:(crowd+superb)]
 
