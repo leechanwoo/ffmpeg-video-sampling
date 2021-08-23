@@ -98,15 +98,15 @@ if __name__ == "__main__":
     ch2_objs = list(filter(lambda obj: ch2.match(obj.key), objs))
 
     print("ch1 shuffling...")
-    ch1_shuffled = random.shuffle(ch1_objs)
+    random.shuffle(ch1_objs)
 
     print("ch2 shuffling...")
-    ch2_shuffled = random.shuffle(ch2_objs)
+    random.shuffle(ch2_objs)
     
     crowd = 15000
     superb = 3000
-    ch1_choosed = ch1_shuffled[:crowd+superb]
-    ch2_choosed = ch2_shuffled[:crowd+superb]
+    ch1_choosed = ch1_objs[:crowd+superb]
+    ch2_choosed = ch2_objs[:crowd+superb]
 
     ch1_crowd = ch1_choosed[:crowd]
     ch2_crowd = ch2_choosed[:crowd]
