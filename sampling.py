@@ -102,7 +102,7 @@ if __name__ == "__main__":
         print("get ch1 objects")
         filtered_objects = list(filter(lambda obj: regex(obj.key), objs))
 
-        print("ch1 shuffling...")
+        print("ch{ch} shuffling...")
         random.shuffle(filtered_objects)
 
         choosed = filtered_objects[:crowd+superb]
