@@ -104,10 +104,10 @@ if __name__ == "__main__":
         print("ch{ch} shuffling...")
         random.shuffle(filtered_objects)
 
-        choosed = filtered_objects[:crowd+superb]
+        choosed = filtered_objects[:(crowd+superb)]
 
         crowd = choosed[:crowd]
-        uperb = choosed[crowd:superb]
+        superb = choosed[crowd:superb]
 
 
         upload_to = f"crowdworks/ch{ch}"
