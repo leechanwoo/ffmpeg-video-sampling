@@ -100,14 +100,15 @@ if __name__ == "__main__":
 
         print("get ch1 objects")
         filtered_objects = list(filter(lambda obj: regex(obj.key), objs))
+        print(filtered_objects)
 
         print("ch{ch} shuffling...")
         random.shuffle(filtered_objects)
 
-        choosed = filtered_objects[:int(crowd+superb)]
+        choosed = filtered_objects[:(crowd+superb)]
 
-        crowd = choosed[:int(crowd)]
-        superb = choosed[int(crowd):int(superb)]
+        crowd = choosed[:crowd]
+        superb = choosed[crowd:superb]
 
 
         upload_to = f"crowdworks/ch{ch}"
