@@ -84,9 +84,6 @@ if __name__ == "__main__":
     bucket = s3.Bucket('extracted-panoramic-images')
 
     
-    crowd = 15000
-    superb = 3000
-
     import random
     time_range = "-(1[4-9]|2[0-2])\d\d\d\d"
     ch1_regex= f"NVR-CH01_S2021081(4|5){time_range}_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4_\d\d\d\d\d\d\.jpg"
@@ -98,6 +95,8 @@ if __name__ == "__main__":
     objs = list(bucket.objects.all())
 
     def choose_objects(regex, ch):
+        crowd = 15000
+        superb = 3000
 
         print("get ch1 objects")
         filtered_objects = list(filter(lambda obj: regex(obj.key), objs))
