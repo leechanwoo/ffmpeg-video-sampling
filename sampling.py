@@ -95,8 +95,8 @@ if __name__ == "__main__":
     objs = list(bucket.objects.all())
 
     def choose_objects(regex, ch):
-        crowd = 15000
-        superb = 3000
+        num_crowd = 15000
+        num_superb = 3000
 
         print("get ch1 objects")
         filtered_objects = list(filter(lambda obj: regex(os.path.basename(obj.key)), objs))
@@ -105,10 +105,10 @@ if __name__ == "__main__":
         print(f"ch{ch} shuffling...")
         random.shuffle(filtered_objects)
 
-        choosed = filtered_objects[:(crowd+superb)]
+        choosed = filtered_objects[:(num_crowd+num_superb)]
 
-        crowd = choosed[:crowd]
-        superb = choosed[crowd:(crowd+superb)]
+        crowd = choosed[:num_crowd]
+        superb = choosed[num_crowd:(num_crowd+num_superb)]
 
         upload_to = f"crowdworks/ch{ch}"
         for i, obj in enumerate(crowd):
