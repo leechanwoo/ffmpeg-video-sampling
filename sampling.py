@@ -91,7 +91,7 @@ if __name__ == "__main__":
     ch1 = re.compile(ch1_regex)
     ch2 = re.compile(ch2_regex)
 
-    objs = list(config.src_bucket.objects.all())
+    objs = list(bucket.objects.all())
     ch1_objs = list(filter(ch1.match, objs))
     ch2_objs = list(filter(ch2.match, objs))
 
