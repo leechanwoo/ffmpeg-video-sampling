@@ -104,13 +104,11 @@ if __name__ == "__main__":
 
         print(f"ch{ch} shuffling...")
         random.shuffle(filtered_objects)
-        print(f"shuffled count: {len(filtered_objects)}")
 
         choosed = filtered_objects[:(crowd+superb)]
 
         crowd = choosed[:crowd]
-        superb = choosed[crowd:superb]
-
+        superb = choosed[crowd:(crowd+superb)]
 
         upload_to = f"crowdworks/ch{ch}"
         for i, obj in enumerate(crowd):
