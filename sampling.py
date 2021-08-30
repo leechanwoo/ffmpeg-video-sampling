@@ -84,9 +84,9 @@ if __name__ == "__main__":
     bucket = s3.Bucket('extracted-panoramic-images')
 
     import random
-    time_range = "-(1[4-9]|2[0-2])\d\d\d\d"
-    ch1_regex= f"NVR-CH01_S2021081(4|5){time_range}_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4_\d\d\d\d\d\d\.jpg"
-    ch2_regex= f"NVR-CH02_S2021081(4|5){time_range}_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4_\d\d\d\d\d\d\.jpg"
+    time_range = "-(1[4-9]|2[0-1])\d\d\d\d"
+    ch1_regex= f"NVR-CH01_S20210816{time_range}_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4_\d\d\d\d\d\d\.jpg"
+    ch2_regex= f"NVR-CH02_S20210816{time_range}_E2021\d\d\d\d-\d\d\d\d\d\d\.mp4_\d\d\d\d\d\d\.jpg"
     ch1 = re.compile(ch1_regex)
     ch2 = re.compile(ch2_regex)
 
@@ -94,20 +94,22 @@ if __name__ == "__main__":
     objs = list(bucket.objects.all())
 
     def choose_objects(regex, ch):
-        num_crowd = 15000
-        num_superb = 3000
+        num_crowd = 2500
+        #num_superb = 3000
 
-        print("get ch1 objects")
+        print("get ch{ch} objects")
         filtered_objects = list(filter(lambda obj: regex(os.path.basename(obj.key)), objs))
         print(f"count: {len(filtered_objects)}")
 
         print(f"ch{ch} shuffling...")
         random.shuffle(filtered_objects)
 
-        choosed = filtered_objects[:(num_crowd+num_superb)]
+        crowd = filtered_objects[:num_crowd]
+        
+        #  choosed = filtered_objects[:(num_crowd+num_superb)]
 
-        crowd = choosed[:num_crowd]
-        superb = choosed[num_crowd:(num_crowd+num_superb)]
+        #  crowd = choosed[:num_crowd]
+        #  superb = choosed[num_crowd:(num_crowd+num_superb)]
 
         upload_to = f"crowdworks/ch{ch}"
         for i, obj in enumerate(crowd):
@@ -117,12 +119,12 @@ if __name__ == "__main__":
             bucket.upload_file(filename, os.path.join(upload_to, filename))
 
 
-        upload_to = f"superbai/ch{ch}"
-        for i, obj in enumerate(superb):
-            filename = os.path.basename(obj.key)
-            print(f"{i}/{len(superb)} upload to: {upload_to}/{filename}")
-            bucket.download_file(obj.key,  filename)
-            bucket.upload_file(filename, os.path.join(upload_to, filename))
+        #  upload_to = f"superbai/ch{ch}"
+        #  for i, obj in enumerate(superb):
+        #      filename = os.path.basename(obj.key)
+        #      print(f"{i}/{len(superb)} upload to: {upload_to}/{filename}")
+        #      bucket.download_file(obj.key,  filename)
+        #      bucket.upload_file(filename, os.path.join(upload_to, filename))
 
 
     choose_objects(ch1.match, "1")
