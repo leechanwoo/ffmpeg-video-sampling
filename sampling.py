@@ -94,7 +94,7 @@ if __name__ == "__main__":
     objs = list(bucket.objects.all())
 
     def choose_objects(regex, ch):
-        num_crowd = 2500
+        num_crowd = 5000
         #num_superb = 3000
 
         print("get ch{ch} objects")
