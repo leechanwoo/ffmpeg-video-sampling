@@ -1,5 +1,6 @@
 
-FROM opencvcourses/opencv:440
+#FROM opencvcourses/opencv:440
+FROM spinaweb/onnxruntime:cuda-py3-opencv
 
 
 ENV AWS_ACCESS_KEY_ID=AKIATDMOZVG6PQJDVGG2
